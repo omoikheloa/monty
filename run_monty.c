@@ -18,6 +18,7 @@ void execute(char *string[], stack_t *stack)
 		{"swap", swap},
 		{"pop", pop},
 		{"sub", sub},
+		{"div", div_op},
 		{"null", NULL},
 	};
 

@@ -60,3 +60,25 @@ void sub(stack_t **stack, unsigned int line_num)
 
 	pop(stack, line_num);
 }
+
+/**
+ * div - divides the second top element of the stack by the top element
+ * @stack: pointer to the head of the stack
+ * @line_num: line number in the file
+ */
+
+void div_op(stack_t **stack, unsigned int line_num)
+{
+	stack_t *temp;
+
+	if (stack == NULL || *stack == NULL || (*stack)->next == NULL ||(*stack)->n == 0)
+	{
+		fprintf(stderr, "L%d: division by zero\n", line_num);
+		exit(EXIT_FAILURE);
+	}
+
+	temp = (*stack)->next;
+	temp->n /= (*stack)->n;
+
+	pop(stack, line_num);
+}
