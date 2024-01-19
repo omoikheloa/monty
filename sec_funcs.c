@@ -1,106 +1,114 @@
 #include "monty.h"
 
 /**
- * monty_add - adds the top two values of a stack_t linked list.
- * @stack: pointer to the top mode node of a stack_t linked list.
- * @current_line: current working line number of a Monty bytecodes file.
+ * _strcmp - compares strings
+ * @opcode: a string to be compared
+ * @list: a string to be compared
+ * Return: 0
  */
-
-void monty_add(stack_t **stack, unsigned int current_line)
+int _strcmp(char *opcode, char *list)
 {
-	if ((*stack)->next == NULL || (*stack)->next->next == NULL)
+	while (*list != '\0')
 	{
-		set_op_tok_error(short_stack_error(current_line, "add"));
-		return;
+		if (*list == ' ')
+			list++;
+		else if (*opcode == *list)
+		{
+			opcode++;
+			list++;
+			if (*opcode == '\0' && (*list == ' ' || *list == '\n' || *list == '\0'))
+				return (1);
+		}
+		else
+			return (0);
 	}
-
-	(*stack)->next->next->n += (*stack)->next->n;
-	monty_pop(stack, current_line);
+	return (0);
 }
 
 /**
- * monty_sub - subtracts the second value from the top of
- * a stack_t linked list by the top value.
- * @stack: pointer to the top mode node of a stack_t linked list.
- * @current_line: current working line number of a Monty bytecodes file.
+ * nlfind - finds newline
+ * @list: the string to find \n
+ * Return: 1 || 0
  */
-void monty_sub(stack_t **stack, unsigned int current_line)
+int nlfind(char *list)
 {
-	if ((*stack)->next == NULL || (*stack)->next->next == NULL)
-	{
-		set_op_tok_error(short_stack_error(current_line, "sub"));
-		return;
-	}
+	char *opcode = "\n";
 
-	(*stack)->next->next->n -= (*stack)->next->n;
-	monty_pop(stack, current_line);
+	while (*list != '\0')
+	{
+		if (*opcode == *list)
+		{
+			opcode++;
+			list++;
+			if (*opcode == '\0')
+				return (1);
+		}
+		else
+			list++;
+	}
+	return (0);
 }
 
 /**
- * monty_div - Divides the second value from the top of
- * a stack_t linked list by the top value.
- * @stack: A pointer to the top mode node of a stack_t linked list.
- * @current_line: current working line number of a Monty bytecodes file.
+ * pushint - int for push opcode
+ * @list: the content of the file
+ * @ln: line number
+ * Return: the number
  */
-
-void monty_div(stack_t **stack, unsigned int current_line)
+int pushint(char *list, int ln)
 {
-	if ((*stack)->next == NULL || (*stack)->next->next == NULL)
-	{
-		set_op_tok_error(short_stack_error(current_line, "div"));
-		return;
-	}
+	char *opcode = "push";
 
-	if ((*stack)->next->n == 0)
+	while (*list != '\0')
 	{
-		set_op_tok_error(div_error(current_line));
-		return;
+		if (*opcode == *list)
+		{
+			opcode++;
+			list++;
+			if (*opcode == '\0')
+				while (*list)
+				{
+					if ((*list >= '0' && *list <= '9') || *list == '-')
+					{
+						combfind(list, ln);
+						return (atoi(list));
+					}
+					else if (*list == ' ')
+						list++;
+					else
+					{
+						fprintf(stderr, "L%d: usage: push integer\n", ln);
+						exit(EXIT_FAILURE);
+					}
+				}
+		}
+		else
+			list++;
 	}
-
-	(*stack)->next->next->n /= (*stack)->next->n;
-	monty_pop(stack, current_line);
+	return (0);
 }
 
 /**
- * monty_mul - Multiplies the second value from the top of
- * a stack_t linked list by the top value.
- * @stack: pointer to the top mode node of a stack_t linked list.
- * @current_line: current working line number of a Monty bytecodes file.
+ * combfind - finds nonnumbers and number combinations
+ * @list: the string
+ * @ln: line number
+ * Return: 1
  */
-
-void monty_mul(stack_t **stack, unsigned int current_line)
+int combfind(char *list, int ln)
 {
-	if ((*stack)->next == NULL || (*stack)->next->next == NULL)
+	int i = 1;
+
+	while (list[i])
 	{
-		set_op_tok_error(short_stack_error(current_line, "mul"));
-		return;
+		if (list[i] == '\0' || list[i] == '\n')
+			break;
+		if ((list[i] >= '0' && list[i] <= '9') || list[i] == ' ')
+			i++;
+		else
+		{
+			fprintf(stderr, "L%d: usage: push integer\n", ln);
+			exit(EXIT_FAILURE);
+		}
 	}
-
-	(*stack)->next->next->n *= (*stack)->next->n;
-	monty_pop(stack, current_line);
-}
-
-/**
- * monty_mod - computes the modulus of the second value from the
- * top of a stack_t linked list by the top value.
- * @stack: pointer to the top mode node of a stack_t linked list.
- * @current_line: current working line number of a Monty bytecodes file.
- */
-
-void monty_mod(stack_t **stack, unsigned int current_line)
-{
-	if ((*stack)->next == NULL || (*stack)->next->next == NULL)
-	{
-		set_op_tok_error(short_stack_error(current_line, "mod"));
-		return;
-	}
-
-	if ((*stack)->next->n == 0)
-	{
-		set_op_tok_error(div_error(current_line));
-		return;
-	}
-
-	(*stack)->next->next->n %= (*stack)->next->n;
-	monty_pop(stack, current_line);
+	return (1);
 }
