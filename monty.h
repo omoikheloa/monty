@@ -54,6 +54,7 @@ int nlfind(char *list);
 void free_list(char *a[]);
 int combfind(char *list, int ln);
 ssize_t getline(char **lineptr, size_t *n, FILE *stream);
+void sub(stack_t **stack, unsigned int line_num);
 
 
 #endif
