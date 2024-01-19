@@ -17,7 +17,8 @@ void execute(char *string[], stack_t *stack)
 		{"add", add},
 		{"swap", swap},
 		{"pop", pop},
-		{"null", NULL}
+		{"sub", sub},
+		{"null", NULL},
 	};
 
 	for (ln = 1, n = 0; string[n + 1]; n++, ln++)
