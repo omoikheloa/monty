@@ -7,6 +7,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <ctype.h>
 #include <sys/syscall.h>
 #include <string.h>
 
@@ -59,6 +60,7 @@ void div_op(stack_t **stack, unsigned int line_num);
 void mod_op(stack_t **stack, unsigned int line_num);
 void mul_op(stack_t **stack, unsigned int line_num);
 void pchar(stack_t **stack, unsigned int line_num);
+void pstr(stack_t **stack, unsigned int line_num);
 
 
 #endif

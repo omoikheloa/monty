@@ -12,7 +12,7 @@ void execute(char *string[], stack_t *stack)
 	int ln, n, i;
 
 	instruction_t st[] = {
-		{"pall", pall}, {"pint", pint}, {"add", add},
+		{"pall", pall}, {"pint", pint}, {"add", add}, {"pstr", pstr},
 		{"swap", swap}, {"pop", pop}, {"sub", sub}, {"pchar", pchar},
 		{"div", div_op}, {"mod", mod_op}, {"mul", mul_op}, {"null", NULL}
 	};
