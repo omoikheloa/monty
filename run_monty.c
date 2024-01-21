@@ -21,6 +21,9 @@ void execute(char *string[], stack_t *stack)
 
 	for (ln = 1, n = 0; string[n + 1]; n++, ln++)
 	{
+		if (string[n][0] == '#')
+			continue;
+
 		if (_strcmp("push", string[n]))
 			push(&stack, ln, pushint(string[n], ln));
 		else if (_strcmp("nop", string[n]))
