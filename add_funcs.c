@@ -84,3 +84,21 @@ void div_op(stack_t **stack, unsigned int line_num)
 	(*stack)->next->n /= (*stack)->n;
 	pop(stack, line_num);
 }
+
+/**
+ * mul_op - multiplies the second top element of the stack by the top element
+ * @stack: pointer to the head of the stack
+ * @line_num: line number in the monty file
+ */
+
+void mul_op(stack_t **stack, unsigned int line_num)
+{
+	if (!stack || !(*stack) || !(*stack)->next)
+	{
+		fprintf(stderr, "L%d: can't mul, stack too short\n", line_num);
+		exit(EXIT_FAILURE);
+	}
+
+	(*stack)->next->n *= (*stack)->n;
+	pop(stack, line_num);
+}

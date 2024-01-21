@@ -56,6 +56,8 @@ int combfind(char *list, int ln);
 ssize_t getline(char **lineptr, size_t *n, FILE *stream);
 void sub(stack_t **stack, unsigned int line_num);
 void div_op(stack_t **stack, unsigned int line_num);
+void mod_op(stack_t **stack, unsigned int line_num);
+void mul_op(stack_t **stack, unsigned int line_num);
 
 
 #endif

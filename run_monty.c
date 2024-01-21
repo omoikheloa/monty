@@ -12,14 +12,11 @@ void execute(char *string[], stack_t *stack)
 	int ln, n, i;
 
 	instruction_t st[] = {
-		{"pall", pall},
-		{"pint", pint},
-		{"add", add},
-		{"swap", swap},
-		{"pop", pop},
-		{"sub", sub},
-		{"div", div_op},
-		{"null", NULL},
+		{"pall", pall}, {"pint", pint},
+		{"add", add}, {"swap", swap},
+		{"pop", pop}, {"sub", sub},
+		{"div", div_op}, {"mod", mod_op},
+		{"mul", mul_op}, {"null", NULL}
 	};
 
 	for (ln = 1, n = 0; string[n + 1]; n++, ln++)
