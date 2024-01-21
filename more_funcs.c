@@ -29,3 +29,26 @@ void mod_op(stack_t **stack, unsigned int line_num)
 	(*stack)->prev = NULL;
 	free(temp);
 }
+
+/**
+ * pchar - prints the character at the top of the stack
+ * @stack: pointer to the head of the stack
+ * @line_num: line number in the monty file
+ */
+
+void pchar(stack_t **stack, unsigned int line_num)
+{
+	if (!stack || !*stack)
+	{
+		fprintf(stderr, "L%d: can't pchar, stack empty\n", line_num);
+		exit(EXIT_FAILURE);
+	}
+
+	if ((*stack)->n < 0 || (*stack)->n > 127)
+	{
+		fprintf(stderr, "L%d: can't pchar, value out of range\n", line_num);
+		exit(EXIT_FAILURE);
+	}
+
+	printf("%c\n", (*stack)->n);
+}
