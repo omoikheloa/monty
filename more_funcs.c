@@ -73,30 +73,3 @@ void pstr(stack_t **stack, unsigned int line_num)
 
 	putchar('\n');
 }
-
-/**
- * rotr - Rotates the stack to the bottom
- * @stack: Pointer to the head of the stack
- * @line_num: Line number in the Monty file
- */
-
-void rotr(stack_t **stack, unsigned int line_num)
-{
-	stack_t *temp, *last = *stack;
-	
-	(void)line_num;
-	
-	if (*stack == NULL || (*stack)->next == NULL)
-		return;
-	
-	stack_t *last = *stack;
-
-	while (last->next != NULL)
-		last = last->next;
-	
-	last->prev->next = NULL;
-	last->prev = NULL;
-	last->next = *stack;
-	(*stack)->prev = last;
-	*stack = last;
-}
