@@ -13,7 +13,7 @@ void execute(char *string[], stack_t *stack)
 
 	instruction_t st[] = {
 		{"pall", pall}, {"pint", pint}, {"add", add}, {"pstr", pstr},
-		{"swap", swap}, {"pop", pop}, {"sub", sub}, {"pchar", pchar},
+		{"swap", swap}, {"pop", pop}, {"sub", sub}, {"pchar", pchar}, {"rotr", rotr},
 		{"div", div_op}, {"mod", mod_op}, {"mul", mul_op}, {"null", NULL}
 	};
 
